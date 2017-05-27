@@ -6,6 +6,7 @@
 #####
 # ChangeLog:
 # ----------
+# 2017-05-26  1.2.0      Checks environment variables for editor of choice.
 # 2017-05-26  1.1.0      Now can create project directories as well
 # 2017-01-20  1.0.0      Updated to handle multiple file initializations
 # 2016-06-08  0.2.0      Can not intiialize a script
@@ -20,7 +21,7 @@ declare -r APP_AUTHOR_NAME="RuneImp"
 declare -r APP_AUTHOR_MAIL="runeimp@gmail.com"
 declare -r APP_NAME="Init"
 declare -r APP_FILE="init"
-declare -r APP_VERSION="1.1.0"
+declare -r APP_VERSION="1.2.0"
 declare -r APP_LICENSES="http://opensource.org/licenses/MIT"
 declare -r APP_LABEL="${APP_AUTHOR_NAME}'s $APP_NAME v$APP_VERSION
 License(s): $APP_LICENSES"
@@ -33,6 +34,7 @@ License(s): $APP_LICENSES"
 declare -a files
 declare -i make_executable=1
 declare -i make_project=1
+declare editor='subl'
 
 
 #
@@ -111,7 +113,19 @@ fi
 
 
 #
-# INIT FILE
+# UPDATE VARIABLES
+#
+if [[ "x${INIT_EDITOR}x" != 'xx' ]]; then
+	editor="$INIT_EDITOR"
+elif [[ "x${VISUAL}x" != 'xx' ]]; then
+	editor="$VISUAL"
+elif [[ "x${EDITOR}x" != 'xx' ]]; then
+	editor="$EDITOR"
+fi
+
+
+#
+# INIT FILES
 #
 if [[ $make_project -eq 0 ]]; then
 	filename="${files[0]}"
@@ -145,6 +159,6 @@ for filename in "${files[@]}"; do
 	else
 		touch "$filename"
 	fi
-	subl "$filename"
+	"$editor" "$filename"
 done
 
