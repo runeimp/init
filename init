@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+###################
+# Init
+#
+#
+#####
+# ChangeLog:
+# ----------
+# 2016-05-30  0.1.0      Initial script creation.
+#
+#
+
+APP_AUTHOR_NAME="RuneImp"
+APP_AUTHOR_MAIL="runeimp@gmail.com"
+APP_NAME="Init"
+APP_FILE="init"
+APP_VERSION="0.1.0"
+APP_LICENSES="http://opensource.org/licenses/MIT"
+APP_LABEL="${APP_AUTHOR_NAME}'s $APP_NAME v$APP_VERSION
+License(s): $APP_LICENSES"
+
+if [[ $# -eq 0 ]]; then
+	echo "You must provide the filename(s) to init..." 1>&2
+	exit 1
+else
+	filename="$1"
+	touch "$@"
+	subl "$@"
+fi
+
