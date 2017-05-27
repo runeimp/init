@@ -6,10 +6,11 @@
 #####
 # ChangeLog:
 # ----------
+# 2017-05-26  1.2.1      Fixed old doc errors.
 # 2017-05-26  1.2.0      Checks environment variables for editor of choice.
 # 2017-05-26  1.1.0      Now can create project directories as well
 # 2017-01-20  1.0.0      Updated to handle multiple file initializations
-# 2016-06-08  0.2.0      Can not intiialize a script
+# 2016-06-08  0.2.0      Can now initialize a script
 # 2016-05-30  0.1.0      Initial script creation
 #
 
@@ -21,7 +22,7 @@ declare -r APP_AUTHOR_NAME="RuneImp"
 declare -r APP_AUTHOR_MAIL="runeimp@gmail.com"
 declare -r APP_NAME="Init"
 declare -r APP_FILE="init"
-declare -r APP_VERSION="1.2.0"
+declare -r APP_VERSION="1.2.1"
 declare -r APP_LICENSES="http://opensource.org/licenses/MIT"
 declare -r APP_LABEL="${APP_AUTHOR_NAME}'s $APP_NAME v$APP_VERSION
 License(s): $APP_LICENSES"

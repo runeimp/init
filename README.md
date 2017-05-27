@@ -16,6 +16,8 @@ Usage
 ``` bash
 $ init README.md LICENSE WTF.txt
 # -or-
+$ init -p wtf README.md LICENSE
+# -or-
 $ init -x script1 script2 script3
 # -or-
 $ init -xp script script2 script3
