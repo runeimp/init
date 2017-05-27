@@ -6,25 +6,109 @@
 #####
 # ChangeLog:
 # ----------
-# 2016-05-30  0.1.0      Initial script creation.
-#
+# 2016-06-08  0.2.0      Can now intiialize a script
+# 2016-05-30  0.1.0      Initial script creation
 #
 
-APP_AUTHOR_NAME="RuneImp"
-APP_AUTHOR_MAIL="runeimp@gmail.com"
-APP_NAME="Init"
-APP_FILE="init"
-APP_VERSION="0.1.0"
-APP_LICENSES="http://opensource.org/licenses/MIT"
-APP_LABEL="${APP_AUTHOR_NAME}'s $APP_NAME v$APP_VERSION
+
+#
+# CONSTANTS
+#
+declare -r APP_AUTHOR_NAME="RuneImp"
+declare -r APP_AUTHOR_MAIL="runeimp@gmail.com"
+declare -r APP_NAME="Init"
+declare -r APP_FILE="init"
+declare -r APP_VERSION="0.2.0"
+declare -r APP_LICENSES="http://opensource.org/licenses/MIT"
+declare -r APP_LABEL="${APP_AUTHOR_NAME}'s $APP_NAME v$APP_VERSION
 License(s): $APP_LICENSES"
+
+
+#
+# VARIABLES
+#
+
+declare -i make_executable=1
+
+
+#
+# FUNCTIONS
+#
+
+
+ask_yn()
+{
+	promp="$1"
+	yes="$2"
+	no="$3"
+
+	read -r -p "${APP_PROMPT_PREFIX} ${promp} [yes/no] (n) " response
+
+	shopt -s nocasematch
+	if [[ "$response" =~ ^(y|yes)$ ]]; then
+	  [ -z "$yes" ] || echo "$yes"
+	  result=0
+	else
+	  [ -z "$no" ] || echo "$no"
+	  result=1
+	fi
+	shopt -u nocasematch
+
+	return $result
+}
+
+
+create_script()
+{
+	local filename="$1"
+
+	echo "#!/usr/bin/env bash" > "$filename"
+	echo "###################" >> "$filename"
+	echo "# $(basename "$filename")" >> "$filename"
+	echo "#" >> "$filename"
+	echo "#" >> "$filename"
+	echo "" >> "$filename"
+	echo "" >> "$filename"
+	echo "" >> "$filename"
+	echo "" >> "$filename"
+
+	chmod +x "$filename"
+}
+
+
+#
+# PARSE ARGUMENTS
+#
 
 if [[ $# -eq 0 ]]; then
 	echo "You must provide the filename(s) to init..." 1>&2
 	exit 1
 else
-	filename="$1"
-	touch "$@"
-	subl "$@"
+	until [[ $# -eq 0 ]]; do
+		case "$1" in
+			-x | -exec | --executable)
+				make_executable=0	;;
+			*)	filename="$1"		;;
+		esac
+		
+		shift
+	done
 fi
+
+
+#
+# INIT FILE
+#
+
+if [[ $make_executable -eq 0 ]]; then
+	if [[ -e "$filename" ]]; then
+		ask_yn "The file already exists, overwrite?"
+		[[ $? -eq 0 ]] && create_script "$filename"
+	else
+		create_script "$filename"
+	fi
+else
+	touch "$filename"
+fi
+subl "$filename"
 
