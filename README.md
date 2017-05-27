@@ -1,7 +1,8 @@
 init
 ====
 
-My simple initialization script for starting new text files.
+My simple initialization script for starting new text files, scripts and projects.
+
 
 Rational
 --------
@@ -46,6 +47,7 @@ ToDo
 
 * [ ] Allow for definition and usage of custom templates.
 * [x] Option to create a project folder as well.
+* [ ] Utilize the text editor specified in `$VISUAL` or `$EDITOR` environment variables if set.
 
 
 
