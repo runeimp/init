@@ -20,6 +20,26 @@ $ init -x script1 script2 script3
 
 This will `touch` the file and load it into [Sublime Text][] as long as the `subl` command is present in your current `$PATH`. In the case of a script when using `-x`, `-exec`, or `--executable` the file will also have `chmod +x` applied to it.
 
+Generated text files are initially empty. Generated scripts look like:
+
+``` bash
+#!/usr/bin/env bash
+###################
+# script_name
+#
+#
+
+
+
+
+```
+
+ToDo
+----
+
+* [ ] Allow for definition and usage of custom templates.
+* [ ] Option to create a project folder as well.
+
 
 
 [Sublime Text]: https://www.sublimetext.com
