@@ -16,6 +16,8 @@ Usage
 $ init README.md LICENSE WTF.txt
 # -or-
 $ init -x script1 script2 script3
+# -or-
+$ init -xp script script2 script3
 ```
 
 This will `touch` the file and load it into [Sublime Text][] as long as the `subl` command is present in your current `$PATH`. In the case of a script when using `-x`, `-exec`, or `--executable` the file will also have `chmod +x` applied to it.
@@ -23,6 +25,8 @@ This will `touch` the file and load it into [Sublime Text][] as long as the `sub
 Generated text files are initially empty. Generated scripts look like:
 
 ``` bash
+$ init -x script_name
+
 #!/usr/bin/env bash
 ###################
 # script_name
@@ -34,11 +38,14 @@ Generated text files are initially empty. Generated scripts look like:
 
 ```
 
+Using one of the options `-p`, `-proj`, `--project` will also create a project directory based on the name of the first filename given and then generate all script files in that directory. Files generated will be empty text files unless you specify one of the "executable" options or use on the magic combo shortcuts `-xp` or `-px`.
+
+
 ToDo
 ----
 
 * [ ] Allow for definition and usage of custom templates.
-* [ ] Option to create a project folder as well.
+* [x] Option to create a project folder as well.
 
 
 
