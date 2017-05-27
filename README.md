@@ -21,9 +21,11 @@ $ init -x script1 script2 script3
 $ init -xp script script2 script3
 ```
 
-This will `touch` the file and load it into [Sublime Text][] as long as the `subl` command is present in your current `$PATH`. In the case of a script when using `-x`, `-exec`, or `--executable` the file will also have `chmod +x` applied to it.
+This will `touch` the file and load it into your text editor of choice as long as long as one of the environment variables `$INIT_EDITOR`, `$VISUAL`, or `$EDITOR` is set. The order of precedence is `$INIT_EDITOR`, `$VISUAL`, then `$EDITOR`. Otherwise the `subl` command will be used. Make sure one of the four options is present in your current `$PATH`.
 
-Generated text files are initially empty. Generated scripts look like:
+In the case of a script when using `-x`, `-exec`, or `--executable` the file will also have `chmod +x` applied to it.
+
+Generated text files are initially empty. But generated scripts look like:
 
 ``` bash
 $ init -x script_name
@@ -47,7 +49,7 @@ ToDo
 
 * [ ] Allow for definition and usage of custom templates.
 * [x] Option to create a project folder as well.
-* [ ] Utilize the text editor specified in `$VISUAL` or `$EDITOR` environment variables if set.
+* [x] Utilize the text editor specified in `$VISUAL` or `$EDITOR` environment variables if set.
 
 
 
