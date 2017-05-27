@@ -13,9 +13,9 @@ Usage
 -----
 
 ``` bash
-$ init README.md
+$ init README.md LICENSE WTF.txt
 # -or-
-$ init -x script_name
+$ init -x script1 script2 script3
 ```
 
 This will `touch` the file and load it into [Sublime Text][] as long as the `subl` command is present in your current `$PATH`. In the case of a script when using `-x`, `-exec`, or `--executable` the file will also have `chmod +x` applied to it.
